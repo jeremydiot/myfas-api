@@ -1,25 +1,31 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import { Routes } from "./config/routes";
+import database from "./config/database";
+import * as dotenv from 'dotenv';
 
-import {Link as LinkModel} from "./models/link.model";
-import {Node as NodeModel} from "./models/node.model";
+dotenv.config();
+
+
+
+// import {Link as LinkModel} from "./models/link.model";
+// import {Node as NodeModel} from "./models/node.model";
 
 /**
  * express configuration
  */
 
-class App{
+export default class App{
+    static PORT: number;
     public app: express.Application;
     public routes: Routes;
 
-    constructor(){
+    constructor(port: number = 3000){
+        App.PORT = port;
         this.app = express.default();
         this.routes = new Routes(this.app);
 
         this.expressConfig();
-
-        this.sequelizeConfig();
 
         this.routes.define();
     }
@@ -29,10 +35,12 @@ class App{
         this.app.use(bodyParser.urlencoded({ extended: false }));
     }
 
-    async sequelizeConfig(){
-        await NodeModel.sync({force:true});
-        await LinkModel.sync({force:true});
+    start(){
+        database.sync({force:true})
+            .then(()=>{
+                this.app.listen(App.PORT,()=>{
+                    console.log("Running on localhost:"+process.env.PORT);
+                });
+            });
     }
 }
-
-export default new App().app;
