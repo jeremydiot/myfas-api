@@ -1,5 +1,5 @@
 import { Model, DataTypes, Sequelize, Deferrable } from "sequelize";
-import { database } from "../config/database";
+import database from "../config/database";
 import { Node } from "./node.model";
 
 export interface LinkInterface {
@@ -35,6 +35,7 @@ Link.init(
       references:{
         model:Node,
         key: "id",
+        deferrable: Deferrable.INITIALLY_IMMEDIATE()
       }
     },
     toId: {
@@ -47,12 +48,11 @@ Link.init(
     }
   },
   {
+    sequelize: database,
     tableName: "links",
-    sequelize: database
+    freezeTableName:true
   }
 );
 
-Link.belongsTo(Node,{foreignKey:"fromId", targetKey:"id",as:"PreviousLinks"});
+Link.belongsTo(Node,{foreignKey:"fromId", targetKey:"id",as:"PreviousLinks",onDelete:'CASCADE',constraints:true});
 Link.belongsTo(Node,{foreignKey:"toId", targetKey:"id",as:"nextLinks"});
-
-Link.sync({ force: true }).then(() => console.log("Link table created"));

@@ -1,5 +1,5 @@
 import { Sequelize, Model, DataTypes, BuildOptions } from "sequelize";
-import { database } from "../config/database";
+import database from "../config/database";
 import { Link } from "./link.model";
 
 export interface NodeInterface{
@@ -14,21 +14,20 @@ export class Node extends Model {
 }
 
 Node.init(
-    {
-      id: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        autoIncrement: true,
-        primaryKey: true
-      },
-      name: {
-        type: new DataTypes.STRING(128),
-        allowNull: false
-      }
+  {
+    id: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      autoIncrement: true,
+      primaryKey: true
     },
-    {
-      tableName: "nodes",
-      sequelize: database // this bit is important
+    name: {
+      type: new DataTypes.STRING(128),
+      allowNull: false
     }
-  );
-  
-  Node.sync({ force: true }).then(() => console.log("Node table created"));
+  },
+  {
+    sequelize: database,
+    tableName: "nodes",
+    freezeTableName:true
+  }
+);

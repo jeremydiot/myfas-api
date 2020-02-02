@@ -3,15 +3,17 @@ import { NodesController } from "../controllers/nodes.controller";
 import { LinksController } from "../controllers/links.controller";
 
 
-export class Routes {
+export class Routes {;
   public nodesController: NodesController;
   public linksController: LinksController;
   private app: Application;
 
   constructor(app: Application){
     this.app = app;
+
     this.nodesController = new NodesController();
     this.linksController = new LinksController();
+
   }
 
   public define(): void {
