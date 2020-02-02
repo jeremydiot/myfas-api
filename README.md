@@ -1,17 +1,26 @@
 # MyFAS-API
 
-## development environment
-```shell
+API REST for MyFilmsAndMovies project
+## Requirements
+- [docker](https://docs.docker.com/install/)
+- [docker-compose](https://docs.docker.com/compose/install/)
 
-npm install
+## Start project
+- choose the environment type in `.env` file
+    - add key `ENVIRONMENT=development` or `ENVIRONMENT=production`
+- start project, execute shell command `docker-compose up`
 
-# start environment
-
-$ docker-compose up
-
-# stop environment 
-
-$ docker-compose down
+## Stop project
+- execute shell command `docker-compose down`
 
 
-```
+## Docker environment
+- **Node.js** : 12
+    - project path: `./`
+- **PostgreSQL**: 12
+    - data path: `./pgdata`
+
+## Routes
+
+
+
