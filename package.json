@@ -51,5 +51,9 @@
     ],
     "exec": "npm run start",
     "ext": "ts"
+  },
+  "dependencies": {
+    "@types/helmet": "0.0.45",
+    "helmet": "^3.21.2"
   }
 }

@@ -44,6 +44,7 @@ Link.init(
       references:{
         model:Node,
         key: "id",
+        deferrable: Deferrable.INITIALLY_IMMEDIATE()
       }
     }
   },

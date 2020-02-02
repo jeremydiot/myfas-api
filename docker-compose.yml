@@ -13,7 +13,7 @@ services:
             bash -c "npm install &&
                      npm run start:${ENVIRONMENT}"
         ports: 
-            - "${PORT}:3000"
+            - "${PORT}:443"
             - "${DEBUG_PORT}:9229"
         depends_on:
             - "postgres"
