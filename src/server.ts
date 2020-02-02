@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-const PORT = 8080;
+const PORT = parseInt(<string>process.env.PORT,10);
 const HOST = "0.0.0.0";
 
 app.listen(PORT, HOST);

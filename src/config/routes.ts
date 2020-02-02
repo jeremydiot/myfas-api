@@ -7,6 +7,6 @@ export class Routes {
   public routes(app: Application): void {
     app.route("/").get(this.nodesController.index);
 
-    app.route("/nodes").get(this.nodesController.node);
+    // app.route("/nodes").get(this.nodesController.index);
   }
 }
