@@ -1,5 +1,10 @@
 import { Sequelize, Model, DataTypes, BuildOptions } from "sequelize";
 import { database } from "../config/database";
+import { Link } from "./link.model";
+
+export interface NodeInterface{
+  name: string;
+}
 
 export class Node extends Model {
   public id!: number;
@@ -11,7 +16,7 @@ export class Node extends Model {
 Node.init(
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true
       },

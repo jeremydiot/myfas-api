@@ -2,22 +2,16 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import { Routes } from "./config/routes";
 
-class App {
-    public app: express.Application;
-    public routePrv: Routes;
+/**
+ * express configuration
+ */
+let app: express.Application =  express.default();
+let routes: Routes = new Routes(app);
 
-    constructor(){
-        this.app = express.default();
-        this.routePrv = new Routes();
-        
-        this.config();
-        this.routePrv.routes(this.app);
-    }
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-    private config(): void {
-        this.app.use(bodyParser.json());
-        this.app.use(bodyParser.urlencoded({ extended: false }));
-    }
-}
-    
-export default new App().app;
+routes.define();
+
+
+export default app;
