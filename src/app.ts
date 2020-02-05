@@ -1,11 +1,10 @@
 import * as express from "express";
-import * as https from "https";
 import * as bodyParser from "body-parser";
 import { Routes } from "./config/routes";
 import database from "./config/database";
 import * as dotenv from "dotenv";
 import helmet from "helmet";
-import fs from "fs";
+
 
 dotenv.config();
 
@@ -14,13 +13,13 @@ dotenv.config();
  */
 
 export default class App{
-    static PORT: number;
+    public port: number;
     public app: express.Application;
     public routes: Routes;
 
 
-    constructor(port: number = 443){
-        App.PORT = port;
+    constructor(port: number = 3000){
+        this.port = port;
 
         this.app = express.default();
         this.routes = new Routes(this.app);
@@ -39,20 +38,9 @@ export default class App{
     start(){
         database.sync({force:true})
             .then(()=>{
-
-
-            const cert = "";
-
-            
-
-            const key = "";
-                
-
-                https.createServer({
-                    key: key,
-                    cert: cert
-                },this.app).listen(App.PORT,()=>{
+                this.app.listen(this.port,()=>{
                     console.log("Running on localhost:"+process.env.PORT);
+                    
                 });
             });
     }
