@@ -2,3 +2,4 @@ node_modules
 pgdata
 doc
 coverage
+.env
