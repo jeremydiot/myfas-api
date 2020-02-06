@@ -1,7 +1,7 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import { Routes } from "./config/routes";
-import database from "./config/database";
+import {database} from "./config/database";
 import * as dotenv from "dotenv";
 import helmet from "helmet";
 

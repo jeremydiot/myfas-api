@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize";
+import { Sequelize, DataTypes } from "sequelize";
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -22,6 +22,4 @@ class Database{
 
 new Database();
 
-export default Database.sequelize;
-// Object.freeze(database);
-// export database;
+export const database =  Database.sequelize;
