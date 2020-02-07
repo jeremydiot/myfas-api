@@ -2,7 +2,7 @@ import { Sequelize, Model, DataTypes, BuildOptions } from "sequelize";
 import database from "../config/database";
 import { Link } from "./link.model";
 
-export interface NodeInterface{
+export interface NodeInterface {
   name: string;
 }
 
@@ -28,6 +28,6 @@ Node.init(
   {
     sequelize: database,
     tableName: "nodes",
-    freezeTableName:true
+    freezeTableName: true
   }
 );

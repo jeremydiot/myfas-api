@@ -1,9 +1,9 @@
-import {Model, DataTypes, Deferrable} from "sequelize";
-import {database} from "../config/database";
-import {Personality} from "./personalities.model";
-import {Media} from "./media.model";
+import { Model, DataTypes, Deferrable } from "sequelize";
+import { database } from "../config/database";
+import { Personality } from "./personalities.model";
+import { Media } from "./media.model";
 
-export interface DirectorInterface{
+export interface DirectorInterface {
   media_id: number;
   personality_id: number;
 }
@@ -16,30 +16,30 @@ export class Director extends Model {
 Director.init(
   {
     media_id: {
-        type: new DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
-        references:{
-          model:Media,
-          key: "id",
-          deferrable: new Deferrable.INITIALLY_IMMEDIATE
-        }
+      type: new DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      references: {
+        model: Media,
+        key: "id",
+        deferrable: new Deferrable.INITIALLY_IMMEDIATE
+      }
     },
     personality_id: {
-        type: new DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
-        references:{
-          model:Personality,
-          key: "id",
-          deferrable: new Deferrable.INITIALLY_IMMEDIATE
-        }
+      type: new DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      references: {
+        model: Personality,
+        key: "id",
+        deferrable: new Deferrable.INITIALLY_IMMEDIATE
+      }
     }
   },
   {
     sequelize: database,
     tableName: "directors",
-    freezeTableName:true
+    freezeTableName: true
   }
 );
 
-Director.belongsTo(Media,{foreignKey:"media_id", targetKey:"id",onDelete:'CASCADE',constraints:true});
-Director.belongsTo(Personality,{foreignKey:"personality_id", targetKey:"id",onDelete:'CASCADE',constraints:true});
+Director.belongsTo(Media, { foreignKey: "media_id", targetKey: "id", onDelete: 'CASCADE', constraints: true });
+Director.belongsTo(Personality, { foreignKey: "personality_id", targetKey: "id", onDelete: 'CASCADE', constraints: true });
