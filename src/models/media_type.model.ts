@@ -2,31 +2,31 @@ import { Model, DataTypes, Deferrable, Sequelize } from "sequelize";
 import { database } from "../config/database";
 
 
-export interface MediaTypeInterface {
+export interface Media_typeInterface {
   label: string;
 }
 
-export class MediaType extends Model {
+export class Media_type extends Model {
   public id!: number;
   public label!: string;
 }
 
-MediaType.init(
+Media_type.init(
   {
     id: {
-      type: new DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
       primaryKey: true
     },
     label: {
-      type: new DataTypes.STRING,
+      type:  DataTypes.STRING,
       allowNull: false,
       unique: true
     }
   },
   {
     sequelize: database,
-    tableName: "media_types",
+    tableName: "medias_types",
     freezeTableName: true
   }
 );

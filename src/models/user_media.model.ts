@@ -23,7 +23,8 @@ User_media.init(
       references: {
         model: User,
         key: "id",
-        deferrable: new Deferrable.INITIALLY_IMMEDIATE
+        //@ts-ignore
+        deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     },
     media_id: {
@@ -32,7 +33,8 @@ User_media.init(
       references: {
         model: Media,
         key: "id",
-        deferrable: new Deferrable.INITIALLY_IMMEDIATE
+        //@ts-ignore
+        deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     },
     viewing_date: {
@@ -44,13 +46,6 @@ User_media.init(
     tableName: "user_media",
     freezeTableName: true,
     timestamps: false,
-    indexes:[
-      {
-        name:"id",
-        fields:["user_id","media_id"],
-        unique: true
-      }
-    ]
   }
 );
 

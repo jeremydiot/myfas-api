@@ -16,28 +16,30 @@ export class Actor extends Model {
 Actor.init(
   {
     media_id: {
-      type: new DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       references: {
         model: Media,
         key: "id",
-        deferrable: new Deferrable.INITIALLY_IMMEDIATE
+        //@ts-ignore
+        deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     },
     personality_id: {
-      type: new DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       references: {
         model: Personality,
         key: "id",
-        deferrable: new Deferrable.INITIALLY_IMMEDIATE
+        //@ts-ignore
+        deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     }
   },
   {
     sequelize: database,
     tableName: "actors",
-    freezeTableName: true
+    freezeTableName: true,
   }
 );
 

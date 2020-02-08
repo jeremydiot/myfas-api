@@ -16,21 +16,23 @@ export class Producer extends Model {
 Producer.init(
   {
     media_id: {
-      type: new DataTypes.INTEGER.UNSIGNED,
+      type:  DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       references: {
         model: Media,
         key: "id",
-        deferrable: new Deferrable.INITIALLY_IMMEDIATE
+        //@ts-ignore
+        deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     },
     personality_id: {
-      type: new DataTypes.INTEGER.UNSIGNED,
+      type:  DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       references: {
         model: Personality,
         key: "id",
-        deferrable: new Deferrable.INITIALLY_IMMEDIATE
+        //@ts-ignore
+        deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     }
   },

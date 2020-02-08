@@ -1,5 +1,5 @@
 import { Model, DataTypes, Deferrable, TIME } from "sequelize";
-import { MediaType } from "./media_type.model"
+import { Media_type } from "./media_type.model"
 import { database } from "../config/database";
 
 export interface MediaInterface {
@@ -28,43 +28,44 @@ export class Media extends Model {
 Media.init(
   {
     id: {
-      type: new DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
       primaryKey: true
     },
     title: {
-      type: new DataTypes.STRING,
+      type:DataTypes.STRING,
       allowNull: false,
     },
     release_date: {
-      type: new DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false
     },
     synopsis: {
-      type: new DataTypes.TEXT,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     number_seasons: {
-      type: new DataTypes.INTEGER.UNSIGNED
+      type: DataTypes.INTEGER.UNSIGNED
     },
     number_episode: {
-      type: new DataTypes.INTEGER.UNSIGNED
+      type: DataTypes.INTEGER.UNSIGNED
     },
     running_time: {
       type: DataTypes.TIME,
       allowNull: false
     },
     image: {
-      type: new DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     media_type_id: {
-      type: new DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       references: {
-        model: MediaType,
+        model: Media_type,
         key: "id",
-        deferrable: new Deferrable.INITIALLY_IMMEDIATE
+        //@ts-ignore
+        deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     }
   },
@@ -75,4 +76,4 @@ Media.init(
   }
 );
 
-Media.belongsTo(MediaType, { foreignKey: "media_type_id", targetKey: "id", onDelete: 'CASCADE', constraints: true });
+Media.belongsTo(Media_type, { foreignKey: "media_type_id", targetKey: "id", onDelete: 'CASCADE', constraints: true });

@@ -13,10 +13,11 @@ export class User extends Model {
   public id!: number;
   public email!: string;
   public password!: string;
-  public salt!: string;
   public last_connection!: String;
 
-
+  checkPassword(pswd: string): boolean{
+    return bcrypt.compareSync(pswd, this.password);
+  }
 }
 
 User.init(
@@ -36,16 +37,11 @@ User.init(
       allowNull: false,
       set(pswd){
         //@ts-ignore
-        this.setDataValue('password', hash(value));
+        this.setDataValue('password', bcrypt.hashSync(pswd, bcrypt.genSaltSync(10),null));
       }
-    },
-    salt:{
-      type: DataTypes.STRING,
-      allowNull: false
     },
     last_connection:{
       type: DataTypes.DATE,
-      
     }
   },
   {

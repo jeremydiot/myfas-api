@@ -26,6 +26,9 @@ export const database =  Database.sequelize;
 
 // PG 		      SEQUELIZE 	FROMAT
 
-// DATE 		    DATEONLY 	  01/01/2001
+
 // TIME 		    TIME 		    00:00:00
 // TIMESTAMPTZ 	DATE		    2016-06-22 19:10:25-07
+
+
+// DATE 		    DATEONLY 	  01/01/2001
