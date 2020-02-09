@@ -43,7 +43,7 @@ User_media.init(
   },
   {
     sequelize: database,
-    tableName: "user_media",
+    tableName: "users_medias",
     freezeTableName: true,
     timestamps: false,
   }
@@ -51,3 +51,4 @@ User_media.init(
 
 User_media.belongsTo(User, { foreignKey: "user_id", targetKey: "id", onDelete: 'CASCADE', constraints: true });
 User_media.belongsTo(Media, { foreignKey: "media_id", targetKey: "id", onDelete: 'CASCADE', constraints: true });
+

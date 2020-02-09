@@ -5,7 +5,6 @@ import * as bcrypt from "bcrypt";
 export interface UserInterface {
   email: string;
   password: string;
-  salt: string;
   last_connection: String;
 }
 
@@ -14,8 +13,9 @@ export class User extends Model {
   public email!: string;
   public password!: string;
   public last_connection!: String;
+  public salt!: String;
 
-  checkPassword(pswd: string): boolean{
+  checkPassword(pswd: string): boolean {
     return bcrypt.compareSync(pswd, this.password);
   }
 }
@@ -27,20 +27,25 @@ User.init(
       autoIncrement: true,
       primaryKey: true
     },
-    email:{
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
-    password:{
+    salt: {
       type: DataTypes.STRING,
       allowNull: false,
-      set(pswd){
+      defaultValue: bcrypt.genSaltSync(10)
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      set(pswd) {
         //@ts-ignore
-        this.setDataValue('password', bcrypt.hashSync(pswd, bcrypt.genSaltSync(10),null));
+        this.setDataValue('password', bcrypt.hashSync(pswd, bcrypt.genSaltSync(10), null));
       }
     },
-    last_connection:{
+    last_connection: {
       type: DataTypes.DATE,
     }
   },
@@ -51,4 +56,3 @@ User.init(
     timestamps: false
   }
 );
-
