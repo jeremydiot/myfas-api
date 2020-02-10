@@ -1,12 +1,14 @@
 import { QueryInterface, Sequelize } from "sequelize/types";
 
-export default {
-  up: async (database: Sequelize) => {
+export class ConfigDatabase{
+  public static async up(database: Sequelize){
 
     const queryInterface: QueryInterface = database.getQueryInterface();
-    // CONSTRAINTS
+// CONSTRAINTS
 
-    // CONSTRAINT unique_key_pair UNIQUE(key1,key2)
+    /** sql
+     *  CONSTRAINT unique_key_pair UNIQUE(key1,key2)
+     */ 
     await queryInterface.addConstraint("users_medias", ["user_id", "media_id"], {
       type: "unique",
       name: "users_medias_unique_pair"
@@ -35,19 +37,23 @@ export default {
     });
 
 
-    // EXTENSIONS
+// EXTENSIONS
     await database.query("CREATE EXTENSION pgcrypto;");
 
 
-    // FUNCTIONS
+// FUNCTIONS
 
-    // -- hash password in database
-    // CREATE OR REPLACE FUNCTION hash_password_func() RETURNS trigger AS $$
-    // BEGIN
-    //     NEW.password = crypt(NEW.password, gen_salt('bf', 10));
-    //     RETURN NEW;
-    // END;
-    // $$ LANGUAGE plpgsql;
+    /** sql
+     * 
+     * -- hash password in database
+     * CREATE OR REPLACE FUNCTION hash_password_func() RETURNS trigger AS $$
+     * BEGIN
+     *    NEW.password = crypt(NEW.password, gen_salt('bf', 10));
+     *    RETURN NEW;
+     * END;
+     * $$ LANGUAGE plpgsql;
+     */
+
     await queryInterface.createFunction(
       "hash_password_func",
       [],
@@ -57,16 +63,19 @@ export default {
       []
     );
 
-    // -- check password in database
-    // CREATE OR REPLACE FUNCTION check_password(integer,text) RETURNS BOOLEAN AS $$
-    //     DECLARE checkPswd BOOLEAN;
-    //     BEGIN
-    //         SELECT (password = crypt($2,password)) INTO checkPswd 
-    //         FROM users WHERE id = $1;
-
-    //         RETURN checkPswd;
-    //     END;
-    // $$ LANGUAGE plpgsql;
+    /** sql
+     * 
+     * -- check password in database
+     * CREATE OR REPLACE FUNCTION check_password(integer,text) RETURNS BOOLEAN AS $$
+     *     DECLARE checkPswd BOOLEAN;
+     *     BEGIN
+     *         SELECT (password = crypt($2,password)) INTO checkPswd 
+     *         FROM users WHERE id = $1;
+     *
+     *         RETURN checkPswd;
+     *   END;
+     * $$ LANGUAGE plpgsql;
+     */
     await queryInterface.createFunction(
       "check_password",
       [{ type: "integer" }, { type: "text" }],
@@ -83,14 +92,19 @@ export default {
       }
     );
 
-    // TRIGGER
-    // -- event on insert or update password
-    // CREATE TRIGGER update_or_insert_pswd_tg BEFORE INSERT OR UPDATE OF password ON users
-    // FOR EACH ROW 
-    // EXECUTE FUNCTION hash_password_func();
+// TRIGGER
+
+    /** sql
+     * -- event on insert or update password
+     * CREATE TRIGGER update_or_insert_pswd_tg BEFORE INSERT OR UPDATE OF password ON users
+     * FOR EACH ROW 
+     * EXECUTE FUNCTION hash_password_func();
+     */
+
     await database.query("CREATE TRIGGER update_or_insert_pswd_tg BEFORE INSERT OR UPDATE OF password ON users FOR EACH ROW EXECUTE FUNCTION hash_password_func();");
-  },
-  down: async (database: Sequelize) => {
+  }
+
+  public static async down(database: Sequelize){
     const queryInterface: QueryInterface = database.getQueryInterface();
 
     await queryInterface.removeConstraint("users_medias","users_medias_unique_pair");
