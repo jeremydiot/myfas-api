@@ -27,15 +27,15 @@ User.init(
       autoIncrement: true,
       primaryKey: true
     },
+    uuid:{
+      type: DataTypes.UUID,
+      unique: true,
+      defaultValue: DataTypes.UUIDV1
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
-    },
-    salt: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: bcrypt.genSaltSync(10)
     },
     password: {
       type: DataTypes.STRING,

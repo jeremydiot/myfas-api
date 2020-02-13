@@ -4,7 +4,7 @@ import { Routes } from "./config/routes";
 import { database } from "./config/database";
 import * as dotenv from "dotenv";
 import helmet from "helmet";
-import * as configDatabase from "./config/config.database";
+import { ConfigDatabase } from "./config/config.database";
 
 
 dotenv.config();
@@ -34,10 +34,10 @@ export default class App{
 
     async start(){
         let databaseSyncOptions={force:false};
-        if(process.env.ENVIRONMENT = "test") databaseSyncOptions.force=true;
+        if(process.env.NODE_ENV === "test") databaseSyncOptions.force=true;
 
         await database.sync(databaseSyncOptions);
-        await configDatabase.default.up(database);
+        await ConfigDatabase.up(database);
             
         this.app.listen(this.port,()=>{
             console.log("Running on localhost:"+process.env.PORT);
