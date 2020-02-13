@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node --inspect=0.0.0.0:9229 -r ts-node/register ./src/server.ts",
-    "start:test": "jest",
-    "start:development": "nodemon",
-    "start:production": "tsc && node build/server.js",
+    "test": "jest",
+    "production":"node build/server.js",
+    "development": "nodemon",
     "build": "tsc"
   },
   "repository": {
@@ -51,7 +50,7 @@
     "watch": [
       "src"
     ],
-    "exec": "npm run start",
+    "exec": "node --inspect=0.0.0.0:9229 -r ts-node/register ./src/server.ts",
     "ext": "ts"
   },
   "dependencies": {

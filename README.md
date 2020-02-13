@@ -22,5 +22,24 @@ API REST for MyFilmsAndMovies project
 
 ## Routes
 
+// USER
 
+add user
+remove user
+modify user
+user information
 
+add media to favorite
+get favorite media
+delete favorite media
+search media
+    by genre
+    by actor
+    by director
+    by producer
+    by personalities
+    by type
+
+search personality
+
+// ADMIN
