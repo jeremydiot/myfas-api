@@ -22,21 +22,25 @@ export class User extends Model {
 
 User.init(
   {
+    //@ts-ignore
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
       primaryKey: true
     },
+    //@ts-ignore
     uuid:{
       type: DataTypes.UUID,
       unique: true,
       defaultValue: DataTypes.UUIDV1
     },
+    //@ts-ignore
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
+    //@ts-ignore
     password: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -45,6 +49,7 @@ User.init(
         this.setDataValue('password', bcrypt.hashSync(pswd, bcrypt.genSaltSync(10), null));
       }
     },
+    //@ts-ignore
     last_connection: {
       type: DataTypes.DATE,
     }

@@ -18,22 +18,27 @@ export class Source extends Model {
 
 Source.init(
   {
+    //@ts-ignore
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       primaryKey: true,
       autoIncrement: true
     },
+    //@ts-ignore
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
+    //@ts-ignore
     login: {
       type: DataTypes.STRING,
     },
+    //@ts-ignore
     password: {
       type: DataTypes.STRING,
     },
+    //@ts-ignore
     url: {
       type: DataTypes.STRING,
       allowNull: false,

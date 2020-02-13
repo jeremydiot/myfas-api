@@ -15,6 +15,7 @@ export class Media_genre extends Model {
 
 Media_genre.init(
   {
+    //@ts-ignore
     media_id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
@@ -25,6 +26,7 @@ Media_genre.init(
         deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     },
+    //@ts-ignore
     genre_id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,

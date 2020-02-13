@@ -13,11 +13,13 @@ export class Media_type extends Model {
 
 Media_type.init(
   {
+    //@ts-ignore
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
       primaryKey: true
     },
+    //@ts-ignore
     label: {
       type:  DataTypes.STRING,
       allowNull: false,

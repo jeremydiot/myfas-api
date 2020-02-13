@@ -15,6 +15,7 @@ export class Producer extends Model {
 
 Producer.init(
   {
+    //@ts-ignore
     media_id: {
       type:  DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
@@ -25,6 +26,7 @@ Producer.init(
         deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     },
+    //@ts-ignore
     personality_id: {
       type:  DataTypes.INTEGER.UNSIGNED,
       allowNull: false,

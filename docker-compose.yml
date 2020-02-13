@@ -8,8 +8,8 @@ services:
       depends_on:
         - postgres
       ports:
-        - "3000:3000"
-        - "9229:9229"
+        - "${PORT}:3000"
+        - "${DEBUG_PORT}:9229"
       env_file: 
         - .env
       volumes:
@@ -17,7 +17,7 @@ services:
   
     postgres:
       container_name: ${PROJECT_NAME}_postgres_${NODE_ENV}
-      image: postgres:12-alpine
+      image: postgres:12
       hostname: ${DB_HOST}
       environment:
         POSTGRES_DB: ${DB_NAME}

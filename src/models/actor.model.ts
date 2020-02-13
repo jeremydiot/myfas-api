@@ -15,17 +15,19 @@ export class Actor extends Model {
 
 Actor.init(
   {
-    media_id: {
+    //@ts-ignore
+    media_id:{
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
-      references: {
+      references:{
         model: Media,
         key: "id",
         //@ts-ignore
         deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     },
-    personality_id: {
+    //@ts-ignore
+    personality_id:{
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       references: {

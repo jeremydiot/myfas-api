@@ -27,37 +27,46 @@ export class Media extends Model {
 
 Media.init(
   {
+    //@ts-ignore
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
       primaryKey: true
     },
+    //@ts-ignore
     title: {
       type:DataTypes.STRING,
       allowNull: false,
     },
+    //@ts-ignore
     release_date: {
       type: DataTypes.DATE,
       allowNull: false
     },
+    //@ts-ignore
     synopsis: {
       type: DataTypes.TEXT,
       allowNull: false
     },
+    //@ts-ignore
     number_seasons: {
       type: DataTypes.INTEGER.UNSIGNED
     },
+    //@ts-ignore
     number_episode: {
       type: DataTypes.INTEGER.UNSIGNED
     },
+    //@ts-ignore
     running_time: {
       type: DataTypes.TIME,
       allowNull: false
     },
+    //@ts-ignore
     image: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    //@ts-ignore
     media_type_id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,

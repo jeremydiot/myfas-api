@@ -1,11 +1,11 @@
-FROM node:12-alpine
+FROM node:12
 
 WORKDIR /home/app
 
 COPY package-lock.json .
 COPY package.json .
 
-RUN npm install
+RUN npm ci
 
 COPY src/ ./src/
 COPY tsconfig.json .

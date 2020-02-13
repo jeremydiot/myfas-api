@@ -12,11 +12,13 @@ export class Genre extends Model {
 
 Genre.init(
   {
+    //@ts-ignore
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
       primaryKey: true
     },
+    //@ts-ignore
     label: {
       type: DataTypes.STRING,
       allowNull: false,

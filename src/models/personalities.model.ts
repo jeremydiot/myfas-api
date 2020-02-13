@@ -12,11 +12,13 @@ export class Personality extends Model {
 
 Personality.init(
   {
+    //@ts-ignore
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
       primaryKey: true
     },
+    //@ts-ignore
     name: {
       type: DataTypes.STRING,
       allowNull: false,

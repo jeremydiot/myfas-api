@@ -17,6 +17,7 @@ export class Media_source extends Model {
 
 Media_source.init(
   {
+    //@ts-ignore
     media_id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
@@ -27,6 +28,7 @@ Media_source.init(
         deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     },
+    //@ts-ignore
     source_id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
@@ -37,6 +39,7 @@ Media_source.init(
         deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     },
+    //@ts-ignore
     last_update:{
       type: DataTypes.DATE,
       allowNull: false

@@ -17,6 +17,7 @@ export class User_media extends Model {
 
 User_media.init(
   {
+    //@ts-ignore
     user_id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
@@ -27,6 +28,7 @@ User_media.init(
         deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     },
+    //@ts-ignore
     media_id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,

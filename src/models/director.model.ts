@@ -15,6 +15,7 @@ export class Director extends Model {
 
 Director.init(
   {
+    //@ts-ignore
     media_id: {
       type:  DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
@@ -25,6 +26,7 @@ Director.init(
         deferrable: Deferrable.INITIALLY_IMMEDIATE
       }
     },
+    //@ts-ignore
     personality_id: {
       type:  DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
