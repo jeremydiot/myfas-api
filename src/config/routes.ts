@@ -1,9 +1,11 @@
 import { Request, Response, Application } from "express";
+import { UsersController } from "../controllers/users.controller"
 // import { NodesController } from "../controllers/nodes.controller";
 // import { LinksController } from "../controllers/links.controller";
 
 
 export class Routes {
+  public userController: UsersController;
   // public nodesController: NodesController;
   // public linksController: LinksController;
   private app: Application;
@@ -11,6 +13,7 @@ export class Routes {
   constructor(app: Application){
     this.app = app;
 
+    this.userController = new UsersController();
     // this.nodesController = new NodesController();
     // this.linksController = new LinksController();
 
@@ -18,11 +21,14 @@ export class Routes {
 
   public define(): void {
 
-    // this.app.route("/user")
-    //   .get() //show
-    //   .post() //create
-    //   .put() //update
-    //   .delete(); //remove
+    this.app.route("/users/:id")
+      .get(this.userController.readOne)
+      .put(this.userController.update)
+      .delete(this.userController.delete);
+
+    this.app.route("/users")
+      .get(this.userController.readAll)
+      .post(this.userController.create);
 
     // this.app.route("/media")
     //   .get() //show

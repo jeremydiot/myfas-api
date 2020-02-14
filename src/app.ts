@@ -19,24 +19,27 @@ export default class App{
     public routes: Routes;
 
 
-    constructor(port: number = 3000){
-        this.port = port;
+    constructor(){
+        this.port = 3000;
 
         this.app = express.default();
         this.routes = new Routes(this.app);
 
+        // app configuration
         this.app.use(helmet());
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
 
+        // define route to app
         this.routes.define();
     }
 
     async start(){
-        let databaseSyncOptions={force:false};
+        let databaseSyncOptions={force:true};
         if(process.env.NODE_ENV === "test") databaseSyncOptions.force=true;
 
         await database.sync(databaseSyncOptions);
+
         await ConfigDatabase.up(database);
             
         this.app.listen(this.port,()=>{

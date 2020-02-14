@@ -9,36 +9,36 @@ export class ConfigDatabase{
     /** sql
      *  CONSTRAINT unique_key_pair UNIQUE(key1,key2)
      */ 
-    await queryInterface.addConstraint("users_medias", ["user_id", "media_id"], {
-      type: "unique",
-      name: "users_medias_unique_pair"
-    });
-    await queryInterface.addConstraint("actors", ["media_id", "personality_id"], {
-      type: "unique",
-      name: "actors_unique_pair"
+    // await queryInterface.addConstraint("users_medias", ["user_id", "media_id"], {
+    //   type: "unique",
+    //   name: "users_medias_unique_pair"
+    // });
+    // await queryInterface.addConstraint("actors", ["media_id", "personality_id"], {
+    //   type: "unique",
+    //   name: "actors_unique_pair"
 
-    });
-    await queryInterface.addConstraint("directors", ["media_id", "personality_id"], {
-      type: "unique",
-      name: "directors_unique_pair"
+    // });
+    // await queryInterface.addConstraint("directors", ["media_id", "personality_id"], {
+    //   type: "unique",
+    //   name: "directors_unique_pair"
 
-    });
-    await queryInterface.addConstraint("producers", ["media_id", "personality_id"], {
-      type: "unique",
-      name: "producers_unique_pair"
-    });
-    await queryInterface.addConstraint("medias_genres", ["media_id", "genre_id"], {
-      type: "unique",
-      name: "medias_genres_unique_pair"
-    });
-    await queryInterface.addConstraint("medias_sources", ["media_id", "source_id"], {
-      type: "unique",
-      name: "medias_sources_unique_pair"
-    });
+    // });
+    // await queryInterface.addConstraint("producers", ["media_id", "personality_id"], {
+    //   type: "unique",
+    //   name: "producers_unique_pair"
+    // });
+    // await queryInterface.addConstraint("medias_genres", ["media_id", "genre_id"], {
+    //   type: "unique",
+    //   name: "medias_genres_unique_pair"
+    // });
+    // await queryInterface.addConstraint("medias_sources", ["media_id", "source_id"], {
+    //   type: "unique",
+    //   name: "medias_sources_unique_pair"
+    // });
 
 
 // EXTENSIONS
-    await database.query("CREATE EXTENSION pgcrypto;");
+    await database.query("CREATE EXTENSION IF NOT EXISTS pgcrypto;");
 
 
 // FUNCTIONS
@@ -60,7 +60,8 @@ export class ConfigDatabase{
       "trigger",
       "plpgsql",
       "NEW.password = crypt(NEW.password, gen_salt('bf', 10)); RETURN NEW;",
-      []
+      [],
+      {force:true}
     );
 
     /** sql
@@ -88,7 +89,8 @@ export class ConfigDatabase{
         variables:
           [
             { type: "BOOLEAN", name: "checkPswd" }
-          ]
+          ],
+        force: true
       }
     );
 
