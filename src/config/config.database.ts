@@ -103,7 +103,7 @@ export class ConfigDatabase{
      * EXECUTE FUNCTION hash_password_func();
      */
 
-    await database.query("CREATE TRIGGER update_or_insert_pswd_tg BEFORE INSERT OR UPDATE OF password ON users FOR EACH ROW EXECUTE FUNCTION hash_password_func();");
+    await database.query("DROP TRIGGER IF EXISTS update_or_insert_pswd_tg ON users; CREATE TRIGGER update_or_insert_pswd_tg BEFORE INSERT OR UPDATE OF password ON users FOR EACH ROW EXECUTE FUNCTION hash_password_func();");
   }
 
   public static async down(database: Sequelize){

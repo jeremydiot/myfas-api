@@ -5,18 +5,21 @@ import * as bcrypt from "bcrypt";
 export interface UserInterface {
   email: string;
   password: string;
-  last_connection: String;
 }
 
 export class User extends Model {
   public id!: number;
   public email!: string;
+  public uuid!: string;
   public password!: string;
-  public last_connection!: String;
-  public salt!: String;
+  public last_connection!: string;
+  public salt!: string;
 
-  checkPassword(pswd: string): boolean {
-    return bcrypt.compareSync(pswd, this.password);
+  async checkPassword(pswd: string) {
+
+    const hash:string = bcrypt.hashSync(pswd, this.salt);
+
+    return await database.query("EXECUTE FUNCTION check_password("+hash+")");
   }
 }
 
@@ -38,15 +41,29 @@ User.init(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      validate:{
+        isEmail: true
+      }
+    },
+    //@ts-ignore
+    salt:{
+      type: DataTypes.STRING,
+      allowNull: false
     },
     //@ts-ignore
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       set(pswd) {
+
+        const salt: string = bcrypt.genSaltSync(10);
+
         //@ts-ignore
-        this.setDataValue('password', bcrypt.hashSync(pswd, bcrypt.genSaltSync(10), null));
+        this.setDataValue('salt',salt);
+
+        //@ts-ignore
+        this.setDataValue('password', bcrypt.hashSync(pswd, salt));
       }
     },
     //@ts-ignore

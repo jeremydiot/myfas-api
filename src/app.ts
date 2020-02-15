@@ -35,7 +35,7 @@ export default class App{
     }
 
     async start(){
-        let databaseSyncOptions={force:true};
+        let databaseSyncOptions={force:false};
         if(process.env.NODE_ENV === "test") databaseSyncOptions.force=true;
 
         await database.sync(databaseSyncOptions);

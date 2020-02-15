@@ -21,10 +21,10 @@ export class Routes {
 
   public define(): void {
 
-    this.app.route("/users/:id")
-      .get(this.userController.readOne)
-      .put(this.userController.update)
-      .delete(this.userController.delete);
+    this.app.route("/users/:uuid")
+      .get(this.userController.readOne);
+    //   .put(this.userController.update)
+    //   .delete(this.userController.delete);
 
     this.app.route("/users")
       .get(this.userController.readAll)

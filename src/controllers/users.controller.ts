@@ -1,10 +1,15 @@
 import { Request, Response } from "express";
 import { User, UserInterface } from "../models/user.model";
 import { UpdateOptions, DestroyOptions } from "sequelize";
+import { strict } from "assert";
 
 export class UsersController {
     public create(req: Request, res: Response){
+        const params: UserInterface = req.body;
 
+        User.create<User>(params)
+            .then((user: User) => {res.status(201).json(user)})
+            .catch((err: Error) => {res.status(500).json(err)});
     }
 
     public checkPassword(req: Request, res: Response){
@@ -21,13 +26,16 @@ export class UsersController {
 
     public readAll(req: Request, res: Response){
         User.findAll<User>({})
-        .then((links: Array<User>) => res.json(links))
+        .then((user: Array<User>) => res.json(user))
         .catch((err: Error) => res.status(500).json(err));
     }
 
     public readOne(req: Request, res: Response){
-        User.findAll<User>({})
-        .then((links: Array<User>) => res.json(links))
+
+        const userUuid :string = req.params.uuid;
+
+        User.findOne<User>({where:{uuid:userUuid}})
+        .then((user: User | null) => res.json(user))
         .catch((err: Error) => res.status(500).json(err));
     }
 
