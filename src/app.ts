@@ -7,6 +7,7 @@ import helmet from "helmet";
 import { ConfigDatabase } from "./config/config.database";
 
 
+
 dotenv.config();
 
 /**
@@ -24,6 +25,13 @@ export default class App{
 
         this.app = express.default();
         this.routes = new Routes(this.app);
+
+        if(process.env.NODE_ENV === "development"){
+            const swaggerUi = require("swagger-ui-express");
+            const swaggerDocument = require("../swagger.json")
+
+            this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+        }
 
         // app configuration
         this.app.use(helmet());
