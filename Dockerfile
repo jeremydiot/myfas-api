@@ -2,13 +2,11 @@ FROM node:12
 
 WORKDIR /home/app
 
-COPY package-lock.json .
-COPY package.json .
+COPY package*.json ./
 
 RUN npm ci
 
-COPY src/ ./src/
-COPY tsconfig.json .
+COPY . ./
 
 RUN npm run build
 

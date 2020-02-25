@@ -1,5 +1,6 @@
-node_modules
-pgdata
-doc
-coverage
+node_modules/
+build/
+pgdata/
+doc/
+coverage/
 .env
